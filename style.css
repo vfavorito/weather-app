@@ -5,3 +5,19 @@
 .cityBtn{
     text-align: left;
 }
+.indexLow{
+    background-color: green;
+    color: white;
+    display: inline-block;
+
+}
+.indexMod{
+    background-color: yellow;
+    color: black;
+    display: inline-block;
+}
+.indexHigh{
+    background-color: red;
+    color: white;
+    display: inline-block;
+}
