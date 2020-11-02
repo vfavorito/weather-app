@@ -21,3 +21,10 @@
     color: white;
     display: inline-block;
 }
+.futureCast{
+    background-color: blue;
+    color: white;
+    display: inline-block;
+    margin: 8px;
+    width: 130px;
+}
