@@ -1,27 +1,56 @@
-let cities = ["Austin", "Chicago", "New York"];
 let latitude = "";
 let longitude = "";
-cityButtons();
+let cities = [];
+let cityName = "";
+let storedCities = [];
+let flag = 0;
+loadCities();
+
+function loadCities() {
+    storedCities = JSON.parse(localStorage.getItem("cities"));
+
+    if (storedCities != null) {
+        for (let i = 0; i < storedCities.length; i++) {
+            cities.push(storedCities[i]);
+        }
+        cityButtons();
+        loadWeather();
+    }
+}
+
 function cityButtons() {
     $("#cButtons").empty();
-    for (let i = 0; i < cities.length; i++) {
-        let cityBtn = $("<button>");
-        cityBtn.addClass("btn btn-outline-dark btn-block cityBtn");
-        cityBtn.attr("data-city", cities[i]);
-        cityBtn.text(cities[i]);
-        $("#cButtons").append(cityBtn);
+    if (cities != null) {
+        for (let i = 0; i < cities.length; i++) {
+            let cityBtn = $("<button>");
+            cityBtn.addClass("btn btn-outline-dark btn-block cityBtn");
+            cityBtn.attr("data-city", cities[i]);
+            cityBtn.text(cities[i]);
+            $("#cButtons").append(cityBtn);
+            localStorage.setItem("cities", JSON.stringify(cities));
+        }
+    }
+    else {
+        return
     }
 }
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     let newCity = $("#newCity").val();
     cities.push(newCity);
+
     cityButtons();
 })
 function loadWeather() {
     $("#mainForecast").empty();
     $("#5Day").empty();
-    let cityName = $(this).attr("data-city");
+    if (flag === 0 && storedCities != null) {
+        cityName = storedCities[storedCities.length - 1];
+        flag++
+    }
+    else {
+        cityName = $(this).attr("data-city");
+    }
     let queryURL = "https:api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=f3347858791a9b0e9e5a6dc48f294071";
     $.ajax({
         url: queryURL,
@@ -50,6 +79,7 @@ function loadWeather() {
                 indexVal.addClass("indexHigh");
             }
             let curUV = $("<p>").text("UV Index: ").add(indexVal);
+            curUV.addClass("uvIndex");
             currentDiv.append(curCity, curTemp, curHumidity, curWind, curUV);
             $("#mainForecast").append(currentDiv);
             console.log(response2)
@@ -76,6 +106,5 @@ function loadWeather() {
             }
         })
     })
-
 }
 $(document).on("click", ".cityBtn", loadWeather) 
