@@ -18,7 +18,7 @@ $("#searchBtn").on("click", function (event) {
     cities.push(newCity);
     cityButtons();
 })
-$(document).on("click", ".cityBtn", function () {
+function loadWeather() {
     $("#mainForecast").empty();
     $("#5Day").empty();
     let cityName = $(this).attr("data-city");
@@ -54,16 +54,28 @@ $(document).on("click", ".cityBtn", function () {
             $("#mainForecast").append(currentDiv);
             console.log(response2)
             for (let i = 1; i < 6; i++) {
+                console.log(response2.daily[i].weather[0].main)
                 let futureDiv = $("<div>");
-                let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/D/YYYY'));
-                let futSymbol = $("<p>").text("");
+                let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/DD/YYYY'));
+                let weatherSymbol = $("<div>");
+                weatherSymbol.addClass("wSymbol");
+                if (response2.daily[i].weather[0].main === "Clear") {
+                    weatherSymbol.html("<i class='fas fa-sun'></i>");
+                }
+                else if (response2.daily[i].weather[0].main === "Clouds") {
+                    weatherSymbol.html("<i class='fas fa-cloud'></i>");
+                }
+                else if (response2.daily[i].weather[0].main === "Rain") {
+                    weatherSymbol.html("<i class='fas fa-cloud-showers-heavy'></i>");
+                }
                 let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + " F");
                 let futHumidity = $("<p>").text("Humidity: " + response2.daily[i].humidity + "%");
                 futureDiv.addClass("futureCast");
-                futureDiv.append(futDate, futSymbol, futTemp, futHumidity);
+                futureDiv.append(futDate, weatherSymbol, futTemp, futHumidity);
                 $("#5Day").append(futureDiv);
             }
         })
     })
 
-})
+}
+$(document).on("click", ".cityBtn", loadWeather) 
