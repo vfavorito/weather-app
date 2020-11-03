@@ -8,7 +8,6 @@ loadCities();
 
 function loadCities() {
     storedCities = JSON.parse(localStorage.getItem("cities"));
-
     if (storedCities != null) {
         for (let i = 0; i < storedCities.length; i++) {
             cities.push(storedCities[i]);
@@ -63,8 +62,18 @@ function loadWeather() {
             url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&units=imperial&appid=f3347858791a9b0e9e5a6dc48f294071",
             method: "GET"
         }).then(function (response2) {
+            $("#5DayText").empty();
             let currentDiv = $("<div>");
-            let curCity = $("<h2>").text(cityName + "  " + moment().format('l'));
+            let fiveDayText = $("<h3>");
+            fiveDayText.text("5 Day Forecast: ");
+            $("#5DayText").append(fiveDayText);
+            let weatherSymbol = $("<img>");
+            let wIcon = response2.current.weather[0].icon;
+            weatherSymbol.attr("src", "http://openweathermap.org/img/w/" + wIcon + ".png");
+            weatherSymbol.addClass("wSymbol");
+            weatherSymbol.attr("style","display: inline-block");
+            let curCity = $("<h2>").text(cityName + "  " + moment().format('l')).add(weatherSymbol);
+            curCity.attr("style","display: inline-block")
             let curTemp = $("<p>").text("Temperature: " + response2.current.temp + " F");
             let curHumidity = $("<p>").text("Humidity: " + response2.current.humidity + "%");
             let curWind = $("<p>").text("Wind Speed: " + response2.current.wind_speed + " MPH");
@@ -87,17 +96,10 @@ function loadWeather() {
                 console.log(response2.daily[i].weather[0].main)
                 let futureDiv = $("<div>");
                 let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/DD/YYYY'));
-                let weatherSymbol = $("<div>");
+                let weatherSymbol = $("<img>");
+                let wIcon = response2.daily[i].weather[0].icon
+                weatherSymbol.attr("src", "http://openweathermap.org/img/w/" + wIcon + ".png");
                 weatherSymbol.addClass("wSymbol");
-                if (response2.daily[i].weather[0].main === "Clear") {
-                    weatherSymbol.html("<i class='fas fa-sun'></i>");
-                }
-                else if (response2.daily[i].weather[0].main === "Clouds") {
-                    weatherSymbol.html("<i class='fas fa-cloud'></i>");
-                }
-                else if (response2.daily[i].weather[0].main === "Rain") {
-                    weatherSymbol.html("<i class='fas fa-cloud-showers-heavy'></i>");
-                }
                 let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + " F");
                 let futHumidity = $("<p>").text("Humidity: " + response2.daily[i].humidity + "%");
                 futureDiv.addClass("futureCast");

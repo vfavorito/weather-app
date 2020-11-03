@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -22,25 +21,25 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <h4>Search for a City:</h4>
+                <h4>Add a City:</h4>
                 <!-- City Search Bar -->
                 <form class="form-inline">
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="City Name" id="newCity">
-                    <button class="btn btn-primary mb-2" id ="searchBtn"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-primary mb-2" id="searchBtn"><i class="fas fa-search"></i></button>
                 </form>
                 <div id="cButtons"></div>
             </div>
             <div class="col-md-9" id="weather">
                 <div id="mainForecast"></div>
-                <h3>5-Day Forecast: </h3>
+                <div id="5DayText"></div>
+                <!-- <h3>5-Day Forecast: </h3> -->
                 <div id="5Day"></div>
             </div>
         </div>
-
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
 </body>
 

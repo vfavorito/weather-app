@@ -35,10 +35,14 @@
     width: 130px;
 }
 .wSymbol{
-    font-size: xx-large;
-    text-align: center;
+    height: 70px;
+    width: 75px;
+    margin-left: 25px;
 }
 .uvIndex{
     display: inline-block;
     margin-right: 10px;
+}
+body{
+    background-color: aliceblue;
 }
