@@ -74,7 +74,7 @@ function loadWeather() {
             weatherSymbol.attr("style","display: inline-block");
             let curCity = $("<h2>").text(cityName + "  " + moment().format('l')).add(weatherSymbol);
             curCity.attr("style","display: inline-block")
-            let curTemp = $("<p>").text("Temperature: " + response2.current.temp + " F");
+            let curTemp = $("<p>").text("Temperature: " + response2.current.temp + "° F");
             let curHumidity = $("<p>").text("Humidity: " + response2.current.humidity + "%");
             let curWind = $("<p>").text("Wind Speed: " + response2.current.wind_speed + " MPH");
             let indexVal = $("<p>").text(response2.current.uvi);
@@ -91,16 +91,14 @@ function loadWeather() {
             curUV.addClass("uvIndex");
             currentDiv.append(curCity, curTemp, curHumidity, curWind, curUV);
             $("#mainForecast").append(currentDiv);
-            console.log(response2)
             for (let i = 1; i < 6; i++) {
-                console.log(response2.daily[i].weather[0].main)
                 let futureDiv = $("<div>");
                 let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/DD/YYYY'));
                 let weatherSymbol = $("<img>");
                 let wIcon = response2.daily[i].weather[0].icon
                 weatherSymbol.attr("src", "http://openweathermap.org/img/w/" + wIcon + ".png");
                 weatherSymbol.addClass("wSymbol");
-                let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + " F");
+                let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + "° F");
                 let futHumidity = $("<p>").text("Humidity: " + response2.daily[i].humidity + "%");
                 futureDiv.addClass("futureCast");
                 futureDiv.append(futDate, weatherSymbol, futTemp, futHumidity);
