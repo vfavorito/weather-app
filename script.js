@@ -50,7 +50,7 @@ function loadWeather() {
     else {
         cityName = $(this).attr("data-city");
     }
-    let queryURL = "https:api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=f3347858791a9b0e9e5a6dc48f294071";
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=f3347858791a9b0e9e5a6dc48f294071";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -69,7 +69,7 @@ function loadWeather() {
             $("#5DayText").append(fiveDayText);
             let weatherSymbol = $("<img>");
             let wIcon = response2.current.weather[0].icon;
-            weatherSymbol.attr("src", "http://openweathermap.org/img/w/" + wIcon + ".png");
+            weatherSymbol.attr("src", "https://openweathermap.org/img/w/" + wIcon + ".png");
             weatherSymbol.addClass("wSymbol");
             weatherSymbol.attr("style","display: inline-block");
             let curCity = $("<h2>").text(cityName + "  " + moment().format('l')).add(weatherSymbol);
@@ -96,7 +96,7 @@ function loadWeather() {
                 let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/DD/YYYY'));
                 let weatherSymbol = $("<img>");
                 let wIcon = response2.daily[i].weather[0].icon
-                weatherSymbol.attr("src", "http://openweathermap.org/img/w/" + wIcon + ".png");
+                weatherSymbol.attr("src", "https://openweathermap.org/img/w/" + wIcon + ".png");
                 weatherSymbol.addClass("wSymbol");
                 let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + "° F");
                 let futHumidity = $("<p>").text("Humidity: " + response2.daily[i].humidity + "%");
@@ -107,4 +107,4 @@ function loadWeather() {
         })
     })
 }
-$(document).on("click", ".cityBtn", loadWeather) 
+$(document).on("click", ".cityBtn", loadWeather); 
