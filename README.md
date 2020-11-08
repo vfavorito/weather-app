@@ -7,13 +7,13 @@ In this repository I created a Weather Dashboard.  The Dashboard allows you to s
 
 
 ## Add a City
-![City Search Bar](images/)
+![City Search Bar](images/addCity.png)
 
 ## Click the City Button to Display Weather
-![City Button](images/)
+![City Button](images/weatherDisplay.png)
 
 ## Add more Cities
-![List of Cities](images/)
+![List of Cities](images/addMoreCities.png)
 
 ### Example
 Here is a link to the Weather Dashboard:  [https://vfavorito.github.io/weather-app/](https://vfavorito.github.io/weather-app/)
