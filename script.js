@@ -42,6 +42,7 @@ $("#searchBtn").on("click", function (event) {
     let newCity = $("#newCity").val();
     cities.push(newCity);
     cityButtons();
+    $("#newCity").val("")
 })
 
 // this function calls openweather api to first get the lat and lon of a city then the weather conditions of that lat and lon
