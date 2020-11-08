@@ -6,6 +6,7 @@ let storedCities = [];
 let flag = 0;
 loadCities();
 
+// pulling past searched citites from local storage and pushing them into an array called cities
 function loadCities() {
     storedCities = JSON.parse(localStorage.getItem("cities"));
     if (storedCities != null) {
@@ -17,6 +18,7 @@ function loadCities() {
     }
 }
 
+// creating buttons for searched cities
 function cityButtons() {
     $("#cButtons").empty();
     if (cities != null) {
@@ -33,19 +35,23 @@ function cityButtons() {
         return
     }
 }
+
+// event listener that wiil be triggered by clicking add city button
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     let newCity = $("#newCity").val();
     cities.push(newCity);
-
     cityButtons();
 })
+
+// this function calls openweather api to first get the lat and lon of a city then the weather conditions of that lat and lon
 function loadWeather() {
     $("#mainForecast").empty();
     $("#5Day").empty();
+// sets cityName to either the last searched city on boot up or the city of the button clicked
     if (flag === 0 && storedCities != null) {
         cityName = storedCities[storedCities.length - 1];
-        flag++
+        flag++;
     }
     else {
         cityName = $(this).attr("data-city");
@@ -57,7 +63,6 @@ function loadWeather() {
     }).then(function (response) {
         longitude = response.city.coord.lon;
         latitude = response.city.coord.lat;
-
         $.ajax({
             url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&units=imperial&appid=f3347858791a9b0e9e5a6dc48f294071",
             method: "GET"
@@ -71,9 +76,9 @@ function loadWeather() {
             let wIcon = response2.current.weather[0].icon;
             weatherSymbol.attr("src", "https://openweathermap.org/img/w/" + wIcon + ".png");
             weatherSymbol.addClass("wSymbol");
-            weatherSymbol.attr("style","display: inline-block");
+            weatherSymbol.attr("style", "display: inline-block");
             let curCity = $("<h2>").text(cityName + "  " + moment().format('l')).add(weatherSymbol);
-            curCity.attr("style","display: inline-block")
+            curCity.attr("style", "display: inline-block");
             let curTemp = $("<p>").text("Temperature: " + response2.current.temp + "° F");
             let curHumidity = $("<p>").text("Humidity: " + response2.current.humidity + "%");
             let curWind = $("<p>").text("Wind Speed: " + response2.current.wind_speed + " MPH");
@@ -95,7 +100,7 @@ function loadWeather() {
                 let futureDiv = $("<div>");
                 let futDate = $("<p>").text(moment().add(i, 'days').calendar('MM/DD/YYYY'));
                 let weatherSymbol = $("<img>");
-                let wIcon = response2.daily[i].weather[0].icon
+                let wIcon = response2.daily[i].weather[0].icon;
                 weatherSymbol.attr("src", "https://openweathermap.org/img/w/" + wIcon + ".png");
                 weatherSymbol.addClass("wSymbol");
                 let futTemp = $("<p>").text("Temp: " + response2.daily[i].temp.day + "° F");
