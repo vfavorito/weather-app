@@ -1,7 +1,5 @@
 # Weather App
-
-### Overview:
-In this repository I created a Weather Dashboard.  The Dashboard allows you to search for a city to add to the dashboard and saves that city to local storage.  When these cities are clicked a display of the current weather conditions is shown as well as a five day forecast.  This was primarily accomplished using Jquery, Ajax calls to openweather API, and Bootstrap.  
+In this repository I created a Weather Dashboard.  The Dashboard allows you to search for a city to add to the dashboard and saves that city to local storage.  When these cities are clicked a display of the current weather conditions is shown as well as a five day forecast.  This was primarily accomplished using Jquery, Ajax calls to openweather API, and Bootstrap.
 
 ## How it works!
 
